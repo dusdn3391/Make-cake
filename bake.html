@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>케이크 굽기</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Cute+Font&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-dining">
+    <audio id="bgm" src="./img/bgm.mp3" loop autoplay></audio>
+
+    <div class="app">
+      <!-- ══════════════════════════════
+           STEP 0 · 시작 화면
+      ══════════════════════════════ -->
+      <div class="screen active" id="s0">
+        <div class="start-screen">
+          <!-- 배경 장식 -->
+          <div class="start-deco start-deco-1">🌸</div>
+          <div class="start-deco start-deco-2">✨</div>
+          <div class="start-deco start-deco-3">🌿</div>
+          <div class="start-deco start-deco-4">✨</div>
+          <div class="start-deco start-deco-5">🌸</div>
+
+          <!-- 케이크 이미지 -->
+          <div class="start-cake-wrap">
+            <img src="./img/bowl.png" class="start-cake-img" alt="케이크" />
+            <div class="start-cake-glow"></div>
+          </div>
+
+          <!-- 제목 -->
+          <div class="start-title-wrap">
+            <div class="start-title-sub">달콤한 나만의</div>
+            <div class="start-title-main">케이크 굽기</div>
+            <div class="start-title-line"></div>
+          </div>
+
+          <!-- 시작 버튼 -->
+          <button class="start-btn" onclick="goStep(1)">
+            <span class="start-btn-icon">🍰</span>
+            <span>게임 시작</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           STEP 1 · 재료 넣기
+      ══════════════════════════════ -->
+      <div class="screen" id="s1">
+        <div class="screen-title">볼에 재료를 넣어요!</div>
+
+        <div class="mixing-station">
+          <img src="./img/bowl.png" class="bowl-image" alt="믹싱볼" />
+          <div class="ingredients-container" id="bowl-contents"></div>
+        </div>
+
+        <!-- 재료 버튼 (오른쪽 구석) -->
+        <div class="controls">
+          <button onclick="addIngredient(this, '계란', './img/real-egg.png')">
+            <img src="./img/real-egg.png" alt="계란" />
+            계란
+          </button>
+          <button
+            onclick="addIngredient(this, '밀가루', './img/pure-flour.png')"
+          >
+            <img src="./img/pure-flour.png" alt="밀가루" />
+            밀가루
+          </button>
+          <button
+            onclick="addIngredient(this, '버터', './img/real-butter.png')"
+          >
+            <img src="./img/real-butter.png" alt="버터" />
+            버터
+          </button>
+          <button
+            onclick="
+              addIngredient(this, '바닐라 에센스', './img/pure-essence.png')
+            "
+          >
+            <img src="./img/pure-essence.png" alt="바닐라 에센스" />
+            바닐라 에센스
+          </button>
+          <button onclick="addIngredient(this, '우유', './img/pure-milk.png')">
+            <img src="./img/pure-milk.png" alt="우유" />
+            우유
+          </button>
+          <button onclick="addIngredient(this, '물', './img/pure-water.png')">
+            <img src="./img/pure-water.png" alt="물" />
+            물
+          </button>
+          <button
+            onclick="addIngredient(this, '김치', './img/real-kimchi.png')"
+          >
+            <img src="./img/real-kimchi.png" alt="김치" />
+            김치
+          </button>
+          <button onclick="addIngredient(this, '설탕', './img/pure-sugar.png')">
+            <img src="./img/pure-sugar.png" alt="설탕" />
+            설탕
+          </button>
+          <button onclick="addIngredient(this, '사탕', './img/pure candy.png')">
+            <img src="./img/pure candy.png" alt="사탕" />
+            사탕
+          </button>
+          <button onclick="addIngredient(this, '감자칩', './img/potato.png')">
+            <img src="./img/potato.png" alt="감자칩" />
+            감자칩
+          </button>
+        </div>
+
+        <button
+          class="next-btn"
+          id="btn-to-pour"
+          disabled
+          onclick="startWhipAnimation()"
+        >
+          반죽 완성! →
+        </button>
+      </div>
+
+      <!-- ══════════════════════════════
+           STEP 2 · 반죽 붓기
+      ══════════════════════════════ -->
+      <div class="screen" id="s2">
+        <div class="screen-title">틀에 반죽을 80% 부어요!</div>
+
+        <div class="margin">
+          <div id="pour-result" class="pour-result"></div>
+
+          <div class="pour-btn-wrap">
+            <button
+              id="pour-btn"
+              class="pour-hold"
+              onmousedown="startPour()"
+              onmouseup="stopPour()"
+              onmouseleave="stopPour()"
+              ontouchstart="startPour()"
+              ontouchend="stopPour()"
+            >
+              ▼ 붓기
+            </button>
+            <span class="pour-hint">버튼을 꾹 눌러주세요!</span>
+          </div>
+          <div class="pour-stage">
+            <div class="pan-img-wrap">
+              <img
+                id="pan-img"
+                src="./img/empty.png"
+                alt="팬"
+                class="pan-img"
+              />
+            </div>
+            <div class="pour-percent-wrap">
+              <span id="pour-percent">0</span>
+              <span class="pour-percent-unit">%</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="next-btn" id="btn-to-bake" disabled onclick="goStep(3)">
+          오븐에 넣기 →
+        </button>
+      </div>
+
+      <!-- ══════════════════════════════
+           STEP 3 · 오븐
+      ══════════════════════════════ -->
+      <div class="screen" id="s3">
+        <div class="screen-title">오븐에서 굽기!</div>
+
+        <div class="oven-outer">
+          <div class="oven-window">
+            <div class="oven-cake-display"></div>
+          </div>
+        </div>
+
+        <div class="timer-wrap">
+          <div id="bake-target-display" class="bake-target-display"></div>
+          <img src="./img/timer.png" class="timer-img" alt="타이머" />
+          <div class="timer-display">
+            <span id="timer-sec">00</span>
+          </div>
+        </div>
+
+        <div id="bake-result" class="bake-result"></div>
+
+        <button class="pull-btn" id="pull-btn" onclick="pullCake()">
+          🔔 꺼내기!
+        </button>
+      </div>
+
+      <!-- ══════════════════════════════
+           STEP 4 · 결과 화면
+      ══════════════════════════════ -->
+      <div class="screen" id="s4">
+
+        <div class="result-screen">
+          <div class="result-cards" id="result-cards"></div>
+          <div class="result-total" id="result-total"></div>
+          <button class="next-btn" onclick="restartGame()">
+            🔄 다시 도전!
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /.app -->
+
+    <!-- ══════════════════════════════
+         휘핑 오버레이 (전역)
+    ══════════════════════════════ -->
+    <div id="whip-overlay">
+      <img id="mixing-img" src="./img/mixing.png" alt="휘핑기" />
+      <img id="mixing-paste-img" src="./img/mixing-paste.png" alt="반죽 완성" />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

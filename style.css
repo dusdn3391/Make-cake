@@ -1,0 +1,811 @@
+:root {
+  --cream: #fff8f0;
+  --brown: #5c3211;
+  --dough: #d4b896;
+}
+
+body {
+  margin: 0;
+  font-family: "Gowun Dodum", sans-serif;
+  min-height: 100vh;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: background-image 0.5s ease;
+}
+
+body.bg-dining {
+  background-image: url("./img/dining.png");
+}
+body.bg-oven {
+  background-image: url("./img/oven.png");
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: -1;
+}
+/* ══════════════════════════════
+   STEP 0 · 시작 화면 (베이커리 표지)
+══════════════════════════════ */
+#s0 {
+  background: linear-gradient(160deg, #fff8f0 0%, #ffe8cc 50%, #ffd4a0 100%);
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#s0::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(255, 200, 120, 0.3) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(255, 160, 80, 0.2) 0%,
+      transparent 60%
+    );
+  pointer-events: none;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 배경 장식 이모지 */
+.start-deco {
+  position: absolute;
+  font-size: 1.8rem;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: decoFloat 4s ease-in-out infinite alternate;
+}
+.start-deco-1 {
+  top: 8%;
+  left: 6%;
+  animation-delay: 0s;
+}
+.start-deco-2 {
+  top: 14%;
+  right: 8%;
+  animation-delay: 0.5s;
+  font-size: 1.2rem;
+}
+.start-deco-3 {
+  top: 50%;
+  left: 4%;
+  animation-delay: 1s;
+}
+.start-deco-4 {
+  bottom: 20%;
+  right: 6%;
+  animation-delay: 1.5s;
+  font-size: 1.2rem;
+}
+.start-deco-5 {
+  bottom: 10%;
+  left: 10%;
+  animation-delay: 0.8s;
+}
+
+@keyframes decoFloat {
+  from {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  to {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+/* 케이크 이미지 */
+.start-cake-wrap {
+  position: relative;
+  margin-bottom: 28px;
+  animation: cakeBounce 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.start-cake-img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 12px 24px rgba(180, 100, 0, 0.2));
+}
+
+.start-cake-glow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 30px;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 160, 60, 0.4) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(6px);
+}
+
+/* 제목 */
+.start-title-wrap {
+  text-align: center;
+  margin-bottom: 36px;
+  animation: cardSlideIn 0.6s ease 0.3s both;
+}
+
+.start-title-sub {
+  font-size: 0.95rem;
+  color: #c07040;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.start-title-main {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #5a3010;
+  letter-spacing: 0.08em;
+  font-family: "Cute Font", cursive;
+  text-shadow: 0 2px 8px rgba(180, 100, 0, 0.15);
+  line-height: 1.1;
+}
+
+.start-title-line {
+  margin: 10px auto 0;
+  width: 60px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ffb347, #ff8c00);
+}
+
+/* 시작 버튼 */
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 48px;
+  font-size: 1.25rem;
+  font-family: "Gowun Dodum", sans-serif;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff9f43, #e67e22);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow:
+    0 6px 20px rgba(230, 126, 34, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: cardSlideIn 0.6s ease 0.5s both;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  letter-spacing: 0.05em;
+}
+
+.start-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow:
+    0 12px 32px rgba(230, 126, 34, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.start-btn:active {
+  transform: scale(0.97);
+}
+
+.start-btn-icon {
+  font-size: 1.4rem;
+}
+/* ── STEP 1 전체 화면 ── */
+#s1,
+#s2,
+#s3 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.screen.active {
+  display: flex;
+}
+
+.screen-title {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  font-size: 4rem;
+  text-align: center;
+  pointer-events: none;
+  transition: none;
+  white-space: nowrap;
+  font-family: "Cute Font", cursive;
+}
+
+.screen-title.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(2.2);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  font-family: "Cute Font", cursive;
+
+}
+
+.screen-title.shrink {
+  font-family: "Cute Font", cursive;
+
+  opacity: 1;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* ── 믹싱 스테이션 ── */
+.mixing-station {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bowl-image {
+  position: absolute;
+  width: 600px;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ingredients-container {
+  position: absolute;
+  width: 420px;
+  height: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 238px;
+  pointer-events: none;
+  z-index: 3;
+  clip-path: ellipse(58% 55% at 51% 38%);
+}
+
+/* ── 재료 버튼 (오른쪽) ── */
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  position: absolute;
+  top: 50%;
+  right: 2vw;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: all;
+}
+
+.controls button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(92, 50, 17, 0.25);
+  background: rgba(255, 248, 240, 0.92);
+  color: var(--brown);
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.15s,
+    background 0.15s;
+  min-width: 70px;
+}
+
+.controls button:hover {
+  background: rgba(255, 232, 192, 0.95);
+  transform: scale(1.05);
+}
+.controls button:active {
+  transform: scale(0.97);
+}
+.controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.controls button img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+/* ── 다음 버튼 ── */
+.next-btn {
+  position: absolute;
+  bottom: 5%;
+  right: 3vw;
+  z-index: 10;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: none;
+  background: var(--brown);
+  color: #ffe8c0;
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  pointer-events: all;
+}
+.next-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── STEP2 ── */
+/* ── STEP2 · 반죽 붓기 ── */
+
+.pour-btn-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pour-hint {
+  font-size: 2.95rem;
+  color: #000;
+  font-family: "Cute Font", cursive;
+  animation: hintPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes hintPulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.margin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* 👈 버튼과 팬 사이 간격 */
+  margin-top: 340px;
+}
+
+/* 팬 + % */
+.pour-stage {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* 팬 이미지 래퍼 */
+.pan-img-wrap {
+  overflow: hidden;
+  display: inline-block;
+  line-height: 0;
+}
+
+/* 팬 이미지 */
+.pan-img {
+  display: block;
+  width: auto;
+  height: auto;
+  margin: -200px;
+  transition: opacity 0.25s ease;
+}
+
+/* % 숫자 */
+.pour-percent-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  line-height: 1;
+}
+
+#pour-percent {
+  font-family: "Cute Font", cursive;
+  font-size: 72px;
+  color: var(--brown);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
+  min-width: 90px;
+  text-align: right;
+  transition: color 0.3s;
+}
+
+.pour-percent-unit {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 28px;
+  color: var(--brown);
+  opacity: 0.7;
+}
+
+/* 결과 텍스트 */
+.pour-result {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--brown);
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+  min-height: 30px;
+  text-align: center;
+}
+
+.pour-result.good {
+  color: #2e7d32;
+}
+.pour-result.over {
+  color: #b71c1c;
+}
+.pour-result.less {
+  color: #e65100;
+}
+/* ── STEP3 ── */
+/* ── STEP 3 타이머 ── */
+.timer-wrap {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.timer-img {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+
+/* 타이머 이미지에서 LCD 화면 위치에 맞게 top/left 조정 */
+.timer-display {
+  position: absolute;
+  top: 38%; /* 이미지 내 LCD 위치에 맞춰 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3.2rem;
+  font-family: "Courier New", monospace;
+  color: #3a4a2a;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(100, 130, 60, 0.4);
+  pointer-events: none;
+}
+.bake-target-display {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #5d4037;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.bake-result {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 8px 0;
+  min-height: 2rem;
+}
+
+.bake-result.good {
+  color: #2e7d32;
+}
+.bake-result.less {
+  color: #1565c0;
+}
+.bake-result.over {
+  color: #c62828;
+}
+.pour-hold {
+  display: block;
+  margin: 0 auto;
+  background: #d4840a;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.pull-btn {
+  background: #d93f00;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* ── 재료 드롭 애니메이션 ── */
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -120%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ══════════════════════════════
+   STEP 4 · 결과 화면
+══════════════════════════════ */
+
+#s4 {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.result-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* 케이크 이모지 */
+.result-cake-emoji {
+  font-size: 80px;
+  animation: cakeBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+}
+
+.result-cake-emoji.perfect {
+  animation:
+    cakeBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    cakeGlow 1.5s ease-in-out 0.8s infinite alternate;
+}
+
+@keyframes cakeBounce {
+  0% {
+    transform: scale(0) rotate(-10deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cakeGlow {
+  from {
+    filter: drop-shadow(0 0 8px rgba(255, 200, 0, 0.4));
+  }
+  to {
+    filter: drop-shadow(0 0 24px rgba(255, 200, 0, 0.9));
+  }
+}
+
+/* 결과 카드 컨테이너 */
+.result-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* 개별 카드 */
+.result-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: cardSlideIn 0.5s ease both;
+}
+
+.result-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.result-card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.result-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes cardSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 카드 아이콘 */
+.result-card-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* 카드 텍스트 */
+.result-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-card-content strong {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.result-card-content p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 총평 */
+.result-total {
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 220, 180, 0.7);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  color: #5a3a1a;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: cardSlideIn 0.5s ease 0.55s both;
+}
+
+.result-total.perfect {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 220, 80, 0.85),
+    rgba(255, 170, 50, 0.85)
+  );
+  color: #5a3a00;
+  animation:
+    cardSlideIn 0.5s ease 0.55s both,
+    totalPulse 2s ease-in-out 1s infinite alternate;
+}
+
+@keyframes totalPulse {
+  from {
+    box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 4px 28px rgba(255, 180, 0, 0.7);
+  }
+}
+/* ────────────────────────────────
+   휘핑 오버레이
+──────────────────────────────── */
+#whip-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#whip-overlay.active {
+  display: flex;
+}
+
+/* mixing.png — JS로 position 직접 제어 */
+#mixing-img {
+  position: fixed;
+  width: 120px;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center center;
+  transition: opacity 0.4s ease;
+}
+
+/* mixing-paste.png — 반죽 완성 이미지 */
+#mixing-paste-img {
+  width: 600px;
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  transform: translateX(-50%);
+  width: 500px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+#mixing-paste-img.visible {
+  opacity: 1;
+}
+
+@media (max-width: 1900px) {
+  .margin {
+margin-top :260px  }
+}
+
+@media (max-width: 1700px) {
+  #mixing-paste-img {
+    bottom: 50px;
+  }
+  .bowl-image {
+    bottom: 50px;
+  }
+  .ingredients-container {
+    bottom: 285px;
+  }
+    .margin {
+margin-top :260px  }
+}
+
+@media (max-width: 1700px) {
+  .margin {
+margin-top :220px ; }
+}
+@media (max-width: 1600px) {
+  .margin {
+margin-top :178px ; }
+}
+
+@media (max-width: 1300px) {
+  .bowl-image {
+    bottom: 190px;
+  }
+  .ingredients-container {
+    bottom: 426px;
+  }
+  .margin {
+    margin-top :50px;
+    gap: 60px; /* 👈 버튼과 팬 사이 간격 */
+  }
+  #mixing-paste-img {
+    bottom: 190px;
+  }
+}

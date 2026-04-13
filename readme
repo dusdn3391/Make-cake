@@ -1,0 +1,59 @@
+# 🎂 케이크 굽기 게임
+
+달콤한 나만의 케이크를 만들어보는 미니 웹 게임
+
+---
+
+## 🕹️ 게임 방법
+
+1. **재료 넣기** — 올바른 재료를 볼에 넣어요
+2. **반죽 붓기** — 버튼을 꾹 눌러 반죽을 80%만큼 부어요
+3. **오븐 굽기** — 목표 시간에 맞춰 케이크를 꺼내요
+4. **결과 확인** — 얼마나 잘 만들었는지 확인해요!
+
+---
+
+## 📁 프로젝트 구조
+
+project/
+├── index.html
+├── script.js
+├── style.css
+├── audio/
+│   └── bgm.mp3
+└── img/
+├── bowl.png
+├── mixing.png
+├── mixing-paste.png
+├── timer.png
+├── empty.png
+├── 10%.png
+├── 50%.png
+├── 80%.png
+├── perfect.png
+├── normal.png
+├── fail.png
+└── (재료 이미지들...)
+
+
+---
+
+## 🏆 점수 기준
+
+| 단계 | 성공 조건 |
+|------|----------|
+| 재료 넣기 | 올바른 재료 6가지만 선택 |
+| 반죽 붓기 | 80~85% 사이로 붓기 |
+| 오븐 굽기 | 목표 시간 ±0.5초 이내에 꺼내기 |
+
+- ✅ 3개 성공 → `perfect.png`
+- ✅ 2개 성공 → `normal.png`  
+- ✅ 1개 이하 → `fail.png`
+
+---
+
+## 🛠️ 사용 기술
+
+- HTML5 / CSS / JavaScript (Vanilla)
+- Google Fonts (Gowun Dodum, Cute Font)
+
